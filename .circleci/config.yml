@@ -30,6 +30,9 @@ jobs:
               echo "Access log wasn't found"
               ls -l access_logs/logs
               exit 1
+            else
+              echo "Access logs found!"
+              ls -l access_logs/logs
             fi
 
 workflows:

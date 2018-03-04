@@ -1,0 +1,26 @@
+version: '3'
+services:
+  service:
+    image: taion809/envoy-examples-fecho
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.10
+  envoy:
+    image: taion809/envoy:latest
+    ports:
+      - "8889:80"
+    depends_on:
+      - service
+    networks:
+      - app_net
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml
+      - ./logs:/tmp/envoy
+
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.238.0/24

@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  hello_world:
+  "hello-world":
     machine: true
     steps:
       - checkout
@@ -13,7 +13,7 @@ jobs:
           docker-compose down
         )
 
-  access_logs:
+  "access-logs":
     machine: true
     steps:
       - checkout
@@ -36,5 +36,5 @@ workflows:
   version: 2
   all:
     jobs:
-      - hello_world
-      - access_logs
+      - "hello-world"
+      - "access-logs"

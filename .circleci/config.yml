@@ -1,6 +1,7 @@
 version: 2
 jobs:
   hello_world:
+    machine: true
     steps:
       - checkout
       - run: pip install -U docker-compose
@@ -12,6 +13,7 @@ jobs:
           docker-compose down
         )
   access_logs:
+    machine: true
     steps:
       - checkout
       - run: pip install -U docker-compose
@@ -35,4 +37,3 @@ workflows:
     jobs:
       - hello_world
       - access_logs
-

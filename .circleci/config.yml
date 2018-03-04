@@ -1,0 +1,38 @@
+version: 2
+jobs:
+  hello_world:
+    steps:
+      - checkout
+      - run: pip install -U docker-compose
+      - run: |
+        (
+          cd hello_world
+          docker-compose up -d
+          curl -I localhost:8889
+          docker-compose down
+        )
+  access_logs:
+    steps:
+      - checkout
+      - run: pip install -U docker-compose
+      - run: |
+        (
+          cd access_logs
+          docker-compose up -d
+          curl -I localhost:8889
+          docker-compose down
+        )
+      - run: |
+        if [[ ! -f access_logs/logs/ingress_http_200.log ]]; then
+          echo "Access log wasn't found"
+          ls -l access_logs/logs
+          exit 1
+        fi
+
+workflows:
+  version: 2
+  all:
+    jobs:
+      - hello_world
+      - access_logs
+

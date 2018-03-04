@@ -1,5 +1,6 @@
 Envoy Examples
 ==============
+[![CircleCI](https://circleci.com/gh/taion809/envoy-examples.svg?style=svg&circle-token=cbdf501ed65fcc9bce6a9bea7981c9a8f395b16b)](https://circleci.com/gh/taion809/envoy-examples)
 
 In this repository you will find runnable example configurations.
 

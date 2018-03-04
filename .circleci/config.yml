@@ -5,13 +5,14 @@ jobs:
     steps:
       - checkout
       - run: pip install -U docker-compose
-      - run: |
+      - run: | 
         (
           cd hello_world
           docker-compose up -d
           curl -I localhost:8889
           docker-compose down
         )
+
   access_logs:
     machine: true
     steps:

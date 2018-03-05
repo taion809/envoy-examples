@@ -9,7 +9,7 @@ jobs:
           command: | 
             cd hello_world
             docker-compose up -d
-            curl -I localhost:8889
+            curl localhost:8889
             docker-compose down
 
   "access-logs":
@@ -21,7 +21,7 @@ jobs:
           command: |
             cd access_logs
             docker-compose up -d
-            curl -I localhost:8889
+            curl localhost:8889
             docker-compose down
 
       - run:
@@ -33,6 +33,32 @@ jobs:
             else
               echo "Access logs found!"
               ls -l access_logs/logs
+            fi
+  "http-gzip":
+    machine: true
+    steps:
+      - checkout
+      - run: pip install -U docker-compose
+      - run: 
+          command: |
+            cd http_gzip
+            docker-compose up -d
+            curl -s -D hf localhost:8889
+            docker-compose down
+      - run:
+          command: | 
+            encoding=$(cat http_gzip/hf | awk '/content-encoding:/ { print $3 }' | sed -e 's/[[:cntrl:]]//')
+            
+            if [[ -z "${encoding}" ]]; then
+              echo "encoding variable is empty"
+              ls -l http_gzip
+              exit 1
+            elif [[ "${encoding}" != "gzip" ]]; then
+              echo "encoding is not gzip"
+              echo "${encoding}"
+              exit 1
+            else
+              echo "Looks like it's returning gzip!"
             fi
 
 workflows:

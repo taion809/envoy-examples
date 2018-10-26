@@ -1,4 +1,4 @@
-FROM envoyproxy/envoy:16455d1ac6616bc6e0436c5e19465743e6d07be2
+FROM envoyproxy/envoy:7226f82e72a6e57d88b50fd19c95f255f20cf129
 LABEL MAINTAINER="Nicholas J <nicholas.a.johns5@gmail.com>"
 
 ENV diversion=1.2.1

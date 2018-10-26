@@ -25,7 +25,7 @@ static_resources:
             - name: envoy.router
   clusters:
   - name: service_google
-    connect_timeout: 0.25s
+    connect_timeout: 5s
     type: LOGICAL_DNS
     lb_policy: ROUND_ROBIN
     hosts: [{ socket_address: { address: google.com, port_value: 443 }}]
